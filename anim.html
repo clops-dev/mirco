@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Animaux</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .form-container {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gestion des Animaux</h1>
+
+    <div class="form-container">
+        <h2>Ajouter un Nouvel Équipement</h2>
+        <input type="text" id="id" placeholder="ID">
+        <input type="text" id="race" placeholder="Race">
+        <input type="number" id="age" placeholder="Âge">
+        <select id="sexe">
+            <option value="">Sélectionnez le Sexe</option>
+            <option value="Mâle">Mâle</option>
+            <option value="Femelle">Femelle</option>
+        </select>
+        <input type="text" id="ressources" placeholder="Ressources Produites">
+        <input type="number" id="poids" placeholder="Poids (kg)">
+        <input type="text" id="etat" placeholder="État de Santé">
+        <input type="text" id="medicaments" placeholder="Médicaments">
+        <input type="text" id="image" placeholder="URL de l'image">
+        <button class="btn" onclick="ajouterAnimal()">Ajouter</button>
+    </div>
+
+    <table id="tableAnimaux">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Race</th>
+                <th>Âge</th>
+                <th>Sexe</th>
+                <th>Ressources Produites</th>
+                <th>Poids</th>
+                <th>État de Santé</th>
+                <th>Médicaments</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function ajouterAnimal() {
+            const id = document.getElementById('id').value;
+            const race = document.getElementById('race').value;
+            const age = document.getElementById('age').value;
+            const sexe = document.getElementById('sexe').value;
+            const ressources = document.getElementById('ressources').value;
+            const poids = document.getElementById('poids').value;
+            const etat = document.getElementById('etat').value;
+            const medicaments = document.getElementById('medicaments').value;
+            const image = document.getElementById('image').value;
+
+            const table = document.getElementById('tableAnimaux').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            newRow.innerHTML = `
+                <td>${id}</td>
+                <td>${race}</td>
+                <td>${age}</td>
+                <td>${sexe}</td>
+                <td>${ressources}</td>
+                <td>${poids}</td>
+                <td>${etat}</td>
+                <td>${medicaments}</td>
+                <td><img src="${image}" alt="Image" style="width:50px;height:50px;"></td>
+                <td><button class="btn" onclick="supprimerAnimal(this)">Supprimer</button></td>
+            `;
+
+            document.getElementById('id').value = '';
+            document.getElementById('race').value = '';
+            document.getElementById('age').value = '';
+            document.getElementById('sexe').value = '';
+            document.getElementById('ressources').value = '';
+            document.getElementById('poids').value = '';
+            document.getElementById('etat').value = '';
+            document.getElementById('medicaments').value = '';
+            document.getElementById('image').value = '';
+        }
+
+        function supprimerAnimal(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+
+</body>
+</html>
